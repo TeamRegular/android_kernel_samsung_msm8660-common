@@ -1655,9 +1655,6 @@ static int voice_setup_modem_voice(struct voice_data *v)
 	struct cvp_create_full_ctl_session_cmd cvp_session_cmd;
 	int ret = 0;
 	struct msm_snddev_info *dev_tx_info;
-#if defined(CONFIG_VPCM_INTERFACE_ON_CSFB)
-	struct msm_snddev_info *dev_rx_info;
-#endif 
 	void *apr_cvp = voice_get_apr_cvp();
 
 #if defined(CONFIG_VPCM_INTERFACE_ON_CSFB) || defined(CONFIG_VPCM_INTERFACE_ON_SVLTE2)
@@ -1686,13 +1683,7 @@ static int voice_setup_modem_voice(struct voice_data *v)
 		pr_err("bad dev_id %d\n", v->dev_tx.dev_id);
 		goto fail;
 	}
-#if defined(CONFIG_VPCM_INTERFACE_ON_CSFB)
-	dev_rx_info = audio_dev_ctrl_find_dev(v->dev_rx.dev_id);
-	if (IS_ERR(dev_rx_info)) {
-		pr_err("bad dev_id %d\n", v->dev_rx.dev_id);
-		goto fail;
-}
-#endif
+
 	/* Use default topology if invalid value in ACDB */
 	cvp_session_cmd.cvp_session.tx_topology_id =
 				get_voice_tx_topology();
@@ -1764,7 +1755,8 @@ if(wb_handle==VPCM_PATH_NARROWBAND)
 #endif
 
 #if defined(CONFIG_VPCM_INTERFACE_ON_CSFB) || defined(CONFIG_VPCM_INTERFACE_ON_SVLTE2)
-#if defined(CONFIG_USA_MODEL_SGH_T989)|| defined(CONFIG_USA_MODEL_SGH_T769)
+
+#if defined(CONFIG_USA_MODEL_SGH_T989)
 	/*
 	 * (39 tty) (43 hac) (49 loopback)
 	 * Do not apply the diamond solution
@@ -1774,8 +1766,6 @@ if(wb_handle==VPCM_PATH_NARROWBAND)
 	if((v->dev_rx.dev_id!=39))
 #elif defined(CONFIG_VPCM_INTERFACE_ON_SVLTE2)
 	if((v->dev_rx.dev_acdb_id != 104) && (v->dev_rx.dev_acdb_id != 102))
-#else
-	if(!(dev_rx_info->capability & SNDDEV_CAP_TTY)) 
 #endif
 	{
 /* BEGIN: VPCM */
@@ -2082,14 +2072,12 @@ if(wb_handle==VPCM_PATH_NARROWBAND)
 #endif
 #if defined(CONFIG_VPCM_INTERFACE_ON_CSFB) || defined(CONFIG_VPCM_INTERFACE_ON_SVLTE2)
 
-#if defined(CONFIG_USA_MODEL_SGH_T989) || defined(CONFIG_USA_MODEL_SGH_T769)
+#if defined(CONFIG_USA_MODEL_SGH_T989)
 	if((v->dev_rx.dev_id!=39)&&(v->dev_rx.dev_id!=43)&&(v->dev_rx.dev_id!=48))
 #elif defined(CONFIG_USA_MODEL_SGH_I727)
 	if((v->dev_rx.dev_id!=39))
 #elif defined(CONFIG_VPCM_INTERFACE_ON_SVLTE2)
 	if((v->dev_rx.dev_acdb_id != 104) && (v->dev_rx.dev_acdb_id != 102))
-#else
-	if(!(dev_rx_info->capability & SNDDEV_CAP_TTY))
 #endif
 	{
 /* BEGIN: VPCM */
@@ -2743,8 +2731,7 @@ defined(CONFIG_KOR_MODEL_SHV_E120K) ||\
 defined(CONFIG_KOR_MODEL_SHV_E120L) ||\
 defined (CONFIG_KOR_MODEL_SHV_E160S) ||\
 defined (CONFIG_KOR_MODEL_SHV_E160K) ||\
-defined(CONFIG_KOR_MODEL_SHV_E160L) ||\
-defined(CONFIG_USA_MODEL_SGH_T769)
+defined(CONFIG_KOR_MODEL_SHV_E160L)
 		/* kks_111020 */
 		/*
 		 * Qualcomm Gon's workaround code to solve the sound mute problem

@@ -14,8 +14,6 @@ ifdef CONFIG_USA_MODEL_SGH_I717
 obj-$(CONFIG_SENSORS_YDA165)	+= yda165_integ.o
 else ifdef CONFIG_USA_MODEL_SGH_I577
 obj-$(CONFIG_SENSORS_YDA165)	+= yda165_integ.o
-else ifdef CONFIG_USA_MODEL_SGH_T769
-obj-$(CONFIG_SENSORS_YDA165)   += yda165_integ.o 
 else
 obj-$(CONFIG_SENSORS_YDA165)    += yda165.o
 endif

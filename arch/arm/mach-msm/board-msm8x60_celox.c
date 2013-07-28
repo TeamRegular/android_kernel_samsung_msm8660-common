@@ -15726,6 +15726,7 @@ static struct msm_bus_scale_pdata mdp_bus_scale_pdata = {
 
 #endif
 #ifdef CONFIG_MSM_BUS_SCALING
+#ifdef CONFIG_FB_MSM_DTV
 static struct msm_bus_vectors dtv_bus_init_vectors[] = {
 	/* For now, 0th array entry is reserved.
 	 * Please leave 0 as is and don't use it
@@ -15827,6 +15828,7 @@ static struct msm_bus_scale_pdata dtv_hdmi_prim_bus_scale_pdata = {
 static struct lcdc_platform_data dtv_hdmi_prim_pdata = {
 	.bus_scale_table = &dtv_hdmi_prim_bus_scale_pdata,
 };
+#endif
 #endif
 
 
@@ -16065,10 +16067,12 @@ static void __init msm_fb_add_devices(void)
 	msm_fb_register_device("mipi_dsi", &mipi_dsi_pdata);
 #endif
 #ifdef CONFIG_MSM_BUS_SCALING
+#ifdef CONFIG_FB_MSM_DTV
 	if (hdmi_is_primary)
 		msm_fb_register_device("dtv", &dtv_hdmi_prim_pdata);
 	else
 		msm_fb_register_device("dtv", &dtv_pdata);
+#endif
 #endif
 #ifdef CONFIG_FB_MSM_TVOUT
 	msm_fb_register_device("tvenc", &atv_pdata);

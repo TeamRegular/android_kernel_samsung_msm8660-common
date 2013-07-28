@@ -2944,6 +2944,8 @@ static struct snddev_icodec_data headset_voip3_tx_data = {
 	.channel_mode = 1,
 	.default_sample_rate = 48000,
 };
+
+#if 0
 static struct snddev_ecodec_data bt_sco_mono_voip3_rx_data = {
 	.capability = (SNDDEV_CAP_RX | SNDDEV_CAP_VOICE),
 	.name = "bt_sco_mono_voip3_rx",
@@ -3021,6 +3023,7 @@ static struct snddev_icodec_data deskdock_voip3_tx_data = {
 	.pamp_on = msm_snddev_enable_submic_power,
 	.pamp_off = msm_snddev_disable_submic_power,
 };
+#endif
 
 // ------- DEFINITION OF LOOPBACK PAIRED DEVICES ------ 
 static struct snddev_icodec_data handset_loopback_rx_data = {
@@ -3603,6 +3606,8 @@ static struct platform_device device_headset_voip3_tx = {
 	.name = "snddev_icodec",
 	.dev = { .platform_data = &headset_voip3_tx_data },
 };
+
+#if 0
 static struct platform_device device_bt_sco_mono_voip3_rx = {
 	.name = "msm_snddev_ecodec",
 	.dev = { .platform_data = &bt_sco_mono_voip3_rx_data },
@@ -3611,6 +3616,7 @@ static struct platform_device device_bt_sco_mono_voip3_tx = {
 	.name = "msm_snddev_ecodec",
 	.dev = { .platform_data = &bt_sco_mono_voip3_tx_data },
 };
+
 static struct platform_device device_bt_sco_mono_nrec_voip3_rx = {
 	.name = "msm_snddev_ecodec",
 	.dev = { .platform_data = &bt_sco_mono_nrec_voip3_rx_data },
@@ -3635,6 +3641,7 @@ static struct platform_device device_bt_sco_stereo_nrec_voip3_tx = {
 	.name = "msm_snddev_ecodec",
 	.dev = { .platform_data = &bt_sco_stereo_nrec_voip3_tx_data },
 };
+
 static struct platform_device device_deskdock_voip3_rx = {
 	.name = "snddev_icodec",
 	.dev = { .platform_data = &deskdock_voip3_rx_data },
@@ -3643,6 +3650,7 @@ static struct platform_device device_deskdock_voip3_tx = {
 	.name = "snddev_icodec",
 	.dev = { .platform_data = &deskdock_voip3_tx_data },
 };
+#endif
 
 // ------- DEFINITION OF LOOPBACK PAIRED DEVICES ------ 
 static struct platform_device device_handset_loopback_rx = {
@@ -3785,7 +3793,7 @@ static struct platform_device *snd_devices_samsung[] __initdata = {
 	&device_bt_sco_stereo_nrec_call2_rx,
 	&device_bt_sco_stereo_nrec_call2_tx,
 
-    	&device_deskdock_call2_rx,
+    &device_deskdock_call2_rx,
 	&device_deskdock_call2_tx,
 
 	// ------- DEFINITION OF VOIP CALL2 PAIRED DEVICES ------ 
@@ -3819,19 +3827,7 @@ static struct platform_device *snd_devices_samsung[] __initdata = {
 	&device_speaker_voip3_rx,
 	&device_speaker_voip3_tx,
 	&device_headset_voip3_rx,
-	&device_headset_voip3_tx,
-
-	&device_bt_sco_mono_voip3_rx,
-	&device_bt_sco_mono_voip3_tx,
-	&device_bt_sco_mono_nrec_voip3_rx,
-	&device_bt_sco_mono_nrec_voip3_tx,
-	&device_bt_sco_stereo_voip3_rx,
-	&device_bt_sco_stereo_voip3_tx,
-	&device_bt_sco_stereo_nrec_voip3_rx,
-	&device_bt_sco_stereo_nrec_voip3_tx,
-
-	&device_deskdock_voip3_rx,
-	&device_deskdock_voip3_tx
+	&device_headset_voip3_tx
 };
 #endif /* SEC_AUDIO_DEVICE */
 
@@ -4862,7 +4858,6 @@ static struct snddev_icodec_data ftm_linein_r_tx_data = {
 	.channel_mode = 1,
 	.default_sample_rate = 48000,
 };
-
 
 static struct platform_device ftm_linein_r_tx_device = {
 	.name = "snddev_icodec",

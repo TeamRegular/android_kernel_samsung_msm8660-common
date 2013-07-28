@@ -108,18 +108,6 @@
 #define RCOMP0_TEMP			20	/* 'C */
 #endif /* CONFIG_PMIC8058_XOADC_CAL */
 
-#elif defined(CONFIG_USA_MODEL_SGH_T769)
-
-#if defined(CONFIG_PMIC8058_XOADC_CAL)
-#define CURRENT_OF_FULL_CHG_UI 2400 /* 240mA */
-#define CURRENT_OF_FULL_CHG 2000 /* 200mA */
-#define RCOMP0_TEMP 20 /* 'C */
-#else
-#define CURRENT_OF_FULL_CHG_UI 2000 /* 200mA */
-#define CURRENT_OF_FULL_CHG 1700 /* 170mA */
-#define RCOMP0_TEMP 20 /* 'C */
-#endif /* CONFIG_PMIC8058_XOADC_CAL */
-
 #else
 
 #if defined(CONFIG_PMIC8058_XOADC_CAL)
@@ -164,7 +152,7 @@
 #endif
 
 #if defined(CONFIG_USA_MODEL_SGH_I577) || \
-	defined(CONFIG_CAN_MODEL_SGH_I577R) || defined(CONFIG_USA_MODEL_SGH_T769)
+	defined(CONFIG_CAN_MODEL_SGH_I577R)
 #define HIGH_BLOCK_TEMP_ADC			706
 #define HIGH_RECOVER_TEMP_ADC			700
 #define EVT_HIGH_BLOCK_TEMP_ADC			707
